@@ -35,7 +35,10 @@ namespace GOL
         int generations = 0;
         // Active cell count
         int cCount = 0;
+        //milliseconds for timer
         int milliseconds = 100;
+        //bool for drawing the grid
+        bool dGrid = true;
 
         public Form1()
         {
@@ -260,13 +263,15 @@ namespace GOL
                     //Drawing number of active neighbors if said number is more than 0 per cell
                     if (universe[x,y].nCount > 0)
                         e.Graphics.DrawString(universe[x, y].nCount.ToString(), numFont, numBrush, cellRect, numFormat);
-                    
-                    //Drawing vertical lines
-                    e.Graphics.DrawLine(gridPen, (float)(x * cellWidth), 0, (float)(x * cellWidth), (float)graphicsPanel1.ClientSize.Height);
+
+                    if (dGrid == true)
+                    {
+                        //Drawing vertical lines
+                        e.Graphics.DrawLine(gridPen, (float)(x * cellWidth), 0, (float)(x * cellWidth), (float)graphicsPanel1.ClientSize.Height);
+                        //drawing horizontal lines
+                        e.Graphics.DrawLine(gridPen, 0, (float)(y * cellHeight), (float)graphicsPanel1.ClientSize.Width, (float)(y * cellHeight));
+                    }
                 }
-                //more efficient grid
-                //drawing horizontal lines
-                e.Graphics.DrawLine(gridPen, 0, (float)(y * cellHeight), (float)graphicsPanel1.ClientSize.Width, (float)(y * cellHeight));
             }
             //Displaying updated cell count
             toolStripStatusLabelCellCount.Text = "Active Cells = " + cCount.ToString() + "/" + totalCells.ToString();
@@ -427,6 +432,12 @@ namespace GOL
             {
                 milliseconds = (int)timerBox.Milliseconds;
             }
+        }
+        //Toggles Grid view
+        private void gridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dGrid = !dGrid;
+            graphicsPanel1.Invalidate();
         }
     }
 }
