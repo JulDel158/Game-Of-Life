@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BoundS" xml:space="preserve">
+    <value>Universe Boundaries: </value>
+  </data>
+  <data name="CountS" xml:space="preserve">
+    <value>Active Cells = </value>
+  </data>
+  <data name="GenS" xml:space="preserve">
+    <value>Generations = </value>
+  </data>
+  <data name="Grid2S" xml:space="preserve">
+    <value>, Height = </value>
+  </data>
+  <data name="GridS" xml:space="preserve">
+    <value>Universe Size: {Width =</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Next_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Next_Icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

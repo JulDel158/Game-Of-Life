@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GOL.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,6 +42,12 @@ namespace GOL
         bool dGrid = true;
         //bool for drawing cell count
         bool dCount = true;
+        //bool for HUD
+        bool dHUD = true;
+        //string  for mode: toroidal/finite
+        string mode = "Toroidal";
+        //string for entire HUD
+        string hudInfo = string.Empty;
 
         public Form1()
         {
@@ -51,6 +58,7 @@ namespace GOL
             timer.Interval = milliseconds; // milliseconds
             timer.Tick += Timer_Tick;
         }
+        
         //Resize method
         private void SizeUniverse (int a, int b)
         {
@@ -72,6 +80,8 @@ namespace GOL
         //Method for counting active neighbors in a finite space
         private int CountNeighborsF (int x, int y)
         {
+            //Changing string for HUD
+            mode = "Finite";
             int count = 0;
             //size of x dimmension
             int xL = universe.GetLength(0);
@@ -101,6 +111,8 @@ namespace GOL
         //Method for counting active neighbors in a toroidal space
         private int CountNeighborsT (int x, int y)
         {
+            //Changing my string for HUD
+            mode = "Toroidal";
             int count = 0;
             int xL = universe.GetLength(0);
             int yL = universe.GetLength(1);
@@ -223,7 +235,7 @@ namespace GOL
             Pen gridPen = new Pen(gridColor, 1);
 
             // A Brush for filling living cells interiors (color)
-            Brush cellBrush = new SolidBrush(universe[0,0].cellColor);
+            Brush cellBrush = new SolidBrush(universe[0, 0].cellColor);
             //color for numbers
             Color numColor = Color.Red;
             //brush for numbers
@@ -235,6 +247,14 @@ namespace GOL
             //Alignment of format
             numFormat.Alignment = StringAlignment.Center;
             numFormat.LineAlignment = StringAlignment.Center;
+            //font for HUD
+            Font HUDFont = new Font(new FontFamily("Arial"), 15f, FontStyle.Bold, GraphicsUnit.Point);
+            //format for HUD
+            StringFormat HUDFormat = new StringFormat();
+            //Alignment of hud format
+            HUDFormat.Alignment = StringAlignment.Near;
+            HUDFormat.LineAlignment = StringAlignment.Near;
+
 
             // Iterate through the universe in the y, top to bottom
             for (int y = 0; y < universe.GetLength(1); y++)
@@ -263,10 +283,10 @@ namespace GOL
                     else
                         universe[x, y].nCount = CountNeighborsF(x, y);
                     //Drawing number of active neighbors if said number is more than 0 per cell
-                    if (dCount == true && universe[x,y].nCount > 0)
+                    if (dCount && universe[x, y].nCount > 0)
                         e.Graphics.DrawString(universe[x, y].nCount.ToString(), numFont, numBrush, cellRect, numFormat);
 
-                    if (dGrid == true)
+                    if (dGrid)
                     {
                         //Drawing vertical lines
                         e.Graphics.DrawLine(gridPen, (float)(x * cellWidth), 0, (float)(x * cellWidth), (float)graphicsPanel1.ClientSize.Height);
@@ -275,6 +295,21 @@ namespace GOL
                     }
                 }
             }
+            //Drawing HUD
+            if (dHUD)
+            {
+                //string to hold hud info
+                hudInfo = Resources.GenS + generations.ToString() + "\n"
+                    + Resources.CountS + cCount.ToString() + "\n"
+                    + Resources.BoundS + mode + "\n"
+                    + Resources.GridS + AxisX.ToString()
+                    + Resources.Grid2S + AxisY.ToString() + "}";
+            
+                //drawing heads up display
+                e.Graphics.DrawString(hudInfo, HUDFont, Brushes.Red, new PointF(0, 0), HUDFormat);
+            }
+            //Resources.GenS + generations.ToString()
+
             //Displaying updated cell count
             toolStripStatusLabelCellCount.Text = "Active Cells = " + cCount.ToString() + "/" + totalCells.ToString();
             // Cleaning up pens and brushes
@@ -449,7 +484,15 @@ namespace GOL
         {
             //setting count to it's opposite value
             dCount = !dCount;
-            //asking windows to repaint panel
+            //asking window to repaint panel
+            graphicsPanel1.Invalidate();
+        }
+
+        private void hUDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Changing bool for hud display
+            dHUD = !dHUD;
+            //asking window to repaint
             graphicsPanel1.Invalidate();
         }
     }

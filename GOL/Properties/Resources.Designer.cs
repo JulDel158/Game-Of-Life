@@ -61,6 +61,51 @@ namespace GOL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Universe Boundaries: .
+        /// </summary>
+        internal static string BoundS {
+            get {
+                return ResourceManager.GetString("BoundS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Cells = .
+        /// </summary>
+        internal static string CountS {
+            get {
+                return ResourceManager.GetString("CountS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generations = .
+        /// </summary>
+        internal static string GenS {
+            get {
+                return ResourceManager.GetString("GenS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to , Height = .
+        /// </summary>
+        internal static string Grid2S {
+            get {
+                return ResourceManager.GetString("Grid2S", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Universe Size: {Width =.
+        /// </summary>
+        internal static string GridS {
+            get {
+                return ResourceManager.GetString("GridS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Next_Icon {
