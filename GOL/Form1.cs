@@ -198,6 +198,7 @@ namespace GOL
         // The event called by the timer every Interval milliseconds.
         private void Timer_Tick(object sender, EventArgs e)
         {
+            timer.Interval = milliseconds;
             NextGeneration();
             //repainting
             graphicsPanel1.Invalidate();
@@ -416,6 +417,16 @@ namespace GOL
             }
             //asking for a repainting
             graphicsPanel1.Invalidate();
+        }
+
+        private void timerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TimerMD timerBox = new TimerMD(milliseconds);
+
+            if (DialogResult.OK == timerBox.ShowDialog())
+            {
+                milliseconds = (int)timerBox.Milliseconds;
+            }
         }
     }
 }

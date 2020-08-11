@@ -524,6 +524,7 @@
             this.timerToolStripMenuItem.Name = "timerToolStripMenuItem";
             this.timerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.timerToolStripMenuItem.Text = "&Timer";
+            this.timerToolStripMenuItem.Click += new System.EventHandler(this.timerToolStripMenuItem_Click);
             // 
             // Form1
             // 

@@ -16,5 +16,22 @@ namespace GOL
         {
             InitializeComponent();
         }
+
+        public TimerMD(int time)
+        {
+            InitializeComponent();
+            Milliseconds = time;
+        }
+        public decimal Milliseconds
+        {
+            get
+            {
+                return MillSecUpDown.Value;
+            }
+            set
+            {
+                MillSecUpDown.Value = value;
+            }
+        }
     }
 }
