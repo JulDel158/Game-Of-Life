@@ -35,6 +35,7 @@ namespace GOL
         int generations = 0;
         // Active cell count
         int cCount = 0;
+        int milliseconds = 100;
 
         public Form1()
         {
@@ -42,7 +43,7 @@ namespace GOL
             //calling my method for initializing/resizing universe
             SizeUniverse(AxisX, AxisY);
             // Setup the timer
-            timer.Interval = 100; // milliseconds
+            timer.Interval = milliseconds; // milliseconds
             timer.Tick += Timer_Tick;
         }
         //Resize method
