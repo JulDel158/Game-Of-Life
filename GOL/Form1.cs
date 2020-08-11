@@ -39,6 +39,8 @@ namespace GOL
         int milliseconds = 100;
         //bool for drawing the grid
         bool dGrid = true;
+        //bool for drawing cell count
+        bool dCount = true;
 
         public Form1()
         {
@@ -261,7 +263,7 @@ namespace GOL
                     else
                         universe[x, y].nCount = CountNeighborsF(x, y);
                     //Drawing number of active neighbors if said number is more than 0 per cell
-                    if (universe[x,y].nCount > 0)
+                    if (dCount == true && universe[x,y].nCount > 0)
                         e.Graphics.DrawString(universe[x, y].nCount.ToString(), numFont, numBrush, cellRect, numFormat);
 
                     if (dGrid == true)
@@ -280,7 +282,6 @@ namespace GOL
             cellBrush.Dispose();
             numBrush.Dispose();
         }
-
         //toogle for cells
         private void graphicsPanel1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -423,20 +424,32 @@ namespace GOL
             //asking for a repainting
             graphicsPanel1.Invalidate();
         }
-
+        //Modal box for changing the milliseconds of our timer
         private void timerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //creating instance of our timerMD modal box and passing parameter to my overloaded constructor
             TimerMD timerBox = new TimerMD(milliseconds);
-
+            //shows box and executes code if ok is pressed
             if (DialogResult.OK == timerBox.ShowDialog())
             {
+                //changes the milliseconds to user input
                 milliseconds = (int)timerBox.Milliseconds;
             }
         }
         //Toggles Grid view
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //changes grid boolean to it's opposite value
             dGrid = !dGrid;
+            //asking windows to repaint panel
+            graphicsPanel1.Invalidate();
+        }
+        //Toggles neigbor count view
+        private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //setting count to it's opposite value
+            dCount = !dCount;
+            //asking windows to repaint panel
             graphicsPanel1.Invalidate();
         }
     }
