@@ -48,6 +48,8 @@ namespace GOL
         string mode = "Toroidal";
         //string for entire HUD
         string hudInfo = string.Empty;
+        //Color for Cell
+        Color CellColor = Color.Gray;
 
         public Form1()
         {
@@ -235,7 +237,7 @@ namespace GOL
             Pen gridPen = new Pen(gridColor, 1);
 
             // A Brush for filling living cells interiors (color)
-            Brush cellBrush = new SolidBrush(universe[0, 0].cellColor);
+            Brush cellBrush = new SolidBrush(CellColor);
             //color for numbers
             Color numColor = Color.Red;
             //brush for numbers
@@ -270,10 +272,11 @@ namespace GOL
                     cellRect.Height = cellHeight;
 
                     // Fill the cell with a brush if alive and counting active cell
-                    if (universe[x, y].active == true)
+                    if (universe[x, y].active)
                     {
                         //adding to total active count
                         cCount++;
+                        //filling rectangle / cell
                         e.Graphics.FillRectangle(cellBrush, cellRect);
                     }
 
@@ -524,6 +527,22 @@ namespace GOL
                 gridColor = GridColor.Color;
             }
             //asking for repaint
+            graphicsPanel1.Invalidate();
+        }
+        //changes color of cells
+        private void cellsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //creating color box
+            ColorDialog CellsColor = new ColorDialog();
+            //assigning the current color of the cells to display on box
+            CellsColor.Color = CellColor;
+            //displaying color box and handling ok
+            if (DialogResult.OK == CellsColor.ShowDialog())
+            {
+                //assigning user input to cell color
+                CellColor = CellsColor.Color;
+            }
+            //Asking window to repaint
             graphicsPanel1.Invalidate();
         }
     }
