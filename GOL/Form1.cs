@@ -285,7 +285,7 @@ namespace GOL
                     //Drawing number of active neighbors if said number is more than 0 per cell
                     if (dCount && universe[x, y].nCount > 0)
                         e.Graphics.DrawString(universe[x, y].nCount.ToString(), numFont, numBrush, cellRect, numFormat);
-
+                    //Checking if we need to draw grid
                     if (dGrid)
                     {
                         //Drawing vertical lines
@@ -308,7 +308,6 @@ namespace GOL
                 //drawing heads up display
                 e.Graphics.DrawString(hudInfo, HUDFont, Brushes.Red, new PointF(0, 0), HUDFormat);
             }
-            //Resources.GenS + generations.ToString()
 
             //Displaying updated cell count
             toolStripStatusLabelCellCount.Text = "Active Cells = " + cCount.ToString() + "/" + totalCells.ToString();
@@ -487,7 +486,7 @@ namespace GOL
             //asking window to repaint panel
             graphicsPanel1.Invalidate();
         }
-
+        //Toggles the HUD
         private void hUDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Changing bool for hud display
@@ -495,7 +494,7 @@ namespace GOL
             //asking window to repaint
             graphicsPanel1.Invalidate();
         }
-
+        //Changes the background color
         private void backgroundToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //creating instance of the color dialog box
@@ -508,6 +507,24 @@ namespace GOL
                 //Assigning the value the user picked to the panel
                 graphicsPanel1.BackColor = BackGrColor.Color;
             }
+            //asking for repaint 
+            graphicsPanel1.Invalidate();
+        }
+        //Changes the grid color
+        private void gridToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //Creating instance of color box
+            ColorDialog GridColor = new ColorDialog();
+            //passing the current color to color box
+            GridColor.Color = gridColor;
+            //displays color box and checks ok button action
+            if (DialogResult.OK == GridColor.ShowDialog())
+            {
+                //changing the grid color to user input
+                gridColor = GridColor.Color;
+            }
+            //asking for repaint
+            graphicsPanel1.Invalidate();
         }
     }
 }
