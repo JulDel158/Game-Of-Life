@@ -94,5 +94,17 @@ namespace GOL.Properties {
                 this["SeedValue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int GenerationValue {
+            get {
+                return ((int)(this["GenerationValue"]));
+            }
+            set {
+                this["GenerationValue"] = value;
+            }
+        }
     }
 }

@@ -28,8 +28,6 @@ namespace GOL
         Color gridColor = Color.Black;
         // The Timer class
         Timer timer = new Timer();
-        // Generation count
-        int generations = 0;
         // Active cell count
         int cCount = 0;
         //milliseconds for timer
@@ -203,10 +201,10 @@ namespace GOL
                 }
             }
             // Increment generation count
-            generations++;
+            Properties.Settings.Default.GenerationValue++;
 
             // Update status strip generations
-            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            toolStripStatusLabelGenerations.Text = "Generations = " + Properties.Settings.Default.GenerationValue.ToString();
             //toolStripStatusLabelCellCount.Text = "Active Cells = " + cCount.ToString();
         }
         // The event called by the timer every Interval milliseconds.
@@ -298,7 +296,7 @@ namespace GOL
             if (Properties.Settings.Default.DrawHUD)
             {
                 //string to hold hud info
-                hudInfo = Resources.GenS + generations.ToString() + "\n"
+                hudInfo = Resources.GenS + Properties.Settings.Default.GenerationValue.ToString() + "\n"
                     + Resources.CountS + cCount.ToString() + "\n"
                     + Resources.BoundS + mode + "\n"
                     + Resources.GridS + AxisX.ToString()
@@ -307,6 +305,8 @@ namespace GOL
                 //drawing heads up display
                 e.Graphics.DrawString(hudInfo, HUDFont, HUDBrush, new PointF(0, 0), HUDFormat);
             }
+            //Updating Generations, needed for settings
+            toolStripStatusLabelGenerations.Text = "Generations = " + Properties.Settings.Default.GenerationValue.ToString();
             //Updating Seed, needed for settings
             toolStripSeedLabel.Text = "Seed: " + Properties.Settings.Default.SeedValue.ToString();
             //Displaying updated cell count
@@ -315,6 +315,7 @@ namespace GOL
             gridPen.Dispose();
             cellBrush.Dispose();
             numBrush.Dispose();
+            HUDBrush.Dispose();
         }
         //toogle for cells
         private void graphicsPanel1_MouseClick(object sender, MouseEventArgs e)
@@ -357,9 +358,9 @@ namespace GOL
                 }
             }
             //restarting generation count
-            generations = 0;
+            Properties.Settings.Default.GenerationValue = 0;
             cCount = 0;
-            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            toolStripStatusLabelGenerations.Text = "Generations = " + Properties.Settings.Default.GenerationValue.ToString();
            // toolStripStatusLabelCellCount.Text = "Active Cells = " + cCount.ToString();
             //repainting after turning off all cells
             graphicsPanel1.Invalidate();
