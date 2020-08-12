@@ -130,5 +130,17 @@ namespace GOL.Properties {
                 this["TimerMilliseconds"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CellTotalValue {
+            get {
+                return ((int)(this["CellTotalValue"]));
+            }
+            set {
+                this["CellTotalValue"] = value;
+            }
+        }
     }
 }

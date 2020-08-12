@@ -17,9 +17,6 @@ namespace GOL
         //axis of the universe, may be removed later, due to our line drawing method our universe must be squared
         int AxisX = 30;
         int AxisY = 30;
-        //total of cells in universe for display
-        int totalCells = 0;
-
         // The universe array
         Cell[,] universe; // = new Cell[AxisX, AxisY];
         // Scratch pad array
@@ -57,7 +54,7 @@ namespace GOL
             universe = new Cell[a, b];
             pad = new Cell[a, b];
             //Recalculating total cells
-            totalCells = a * b;
+            Properties.Settings.Default.CellTotalValue = a * b;
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
@@ -306,7 +303,7 @@ namespace GOL
             //Updating Seed, needed for settings
             toolStripSeedLabel.Text = "Seed: " + Properties.Settings.Default.SeedValue.ToString();
             //Displaying updated cell count
-            toolStripStatusLabelCellCount.Text = "Active Cells = " + Properties.Settings.Default.ActiveCellCount.ToString() + "/" + totalCells.ToString();
+            toolStripStatusLabelCellCount.Text = "Active Cells = " + Properties.Settings.Default.ActiveCellCount.ToString() + "/" + Properties.Settings.Default.CellTotalValue.ToString();
             // Cleaning up pens and brushes
             gridPen.Dispose();
             cellBrush.Dispose();
