@@ -202,5 +202,17 @@ namespace GOL.Properties {
                 this["HUDColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HUDInfo {
+            get {
+                return ((string)(this["HUDInfo"]));
+            }
+            set {
+                this["HUDInfo"] = value;
+            }
+        }
     }
 }

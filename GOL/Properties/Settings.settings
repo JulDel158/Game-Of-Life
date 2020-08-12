@@ -47,5 +47,8 @@
     <Setting Name="HUDColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">255, 128, 128</Value>
     </Setting>
+    <Setting Name="HUDInfo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

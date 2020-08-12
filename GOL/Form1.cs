@@ -22,8 +22,6 @@ namespace GOL
         Timer timer = new Timer();
         //string  for mode: toroidal/finite
         string mode = "Toroidal";
-        //string for entire HUD
-        string hudInfo = string.Empty;
 
         public Form1()
         {
@@ -280,14 +278,14 @@ namespace GOL
             if (Properties.Settings.Default.DrawHUD)
             {
                 //string to hold hud info
-                hudInfo = Resources.GenS + Properties.Settings.Default.GenerationValue.ToString() + "\n"
+                Properties.Settings.Default.HUDInfo = Resources.GenS + Properties.Settings.Default.GenerationValue.ToString() + "\n"
                     + Resources.CountS + Properties.Settings.Default.ActiveCellCount.ToString() + "\n"
                     + Resources.BoundS + mode + "\n"
                     + Resources.GridS + Properties.Settings.Default.UniXAxis.ToString()
                     + Resources.Grid2S + Properties.Settings.Default.UniYAxis.ToString() + "}";
             
                 //drawing heads up display
-                e.Graphics.DrawString(hudInfo, HUDFont, HUDBrush, new PointF(0, 0), HUDFormat);
+                e.Graphics.DrawString(Properties.Settings.Default.HUDInfo, HUDFont, HUDBrush, new PointF(0, 0), HUDFormat);
             }
             //Updating Generations, needed for settings
             toolStripStatusLabelGenerations.Text = "Generations = " + Properties.Settings.Default.GenerationValue.ToString();
@@ -558,7 +556,8 @@ namespace GOL
             Properties.Settings.Default.Reload();
             //assings reloaded color to background color
             graphicsPanel1.BackColor = Properties.Settings.Default.BackgroundColor;
-
+            //resizing universe to reloaded value
+            SizeUniverse(Properties.Settings.Default.UniXAxis, Properties.Settings.Default.UniYAxis);
             //asking window to redraw
             graphicsPanel1.Invalidate();
         }
@@ -569,7 +568,8 @@ namespace GOL
             Properties.Settings.Default.Reset();
             //assigns default color to our background
             graphicsPanel1.BackColor = Properties.Settings.Default.BackgroundColor;
-
+            //resizing universe to default value
+            SizeUniverse(Properties.Settings.Default.UniXAxis, Properties.Settings.Default.UniYAxis);
             //asking window to redraw
             graphicsPanel1.Invalidate();
         }
