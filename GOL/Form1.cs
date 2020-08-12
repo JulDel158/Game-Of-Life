@@ -50,6 +50,8 @@ namespace GOL
         string hudInfo = string.Empty;
         //Color for Cell
         Color CellColor = Color.Gray;
+        //color for HUD
+        Color HUDColor = Color.Red;
 
         public Form1()
         {
@@ -235,7 +237,8 @@ namespace GOL
 
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
-
+            //Brush for HUD
+            Brush HUDBrush = new SolidBrush(HUDColor);
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(CellColor);
             //color for numbers
@@ -309,7 +312,7 @@ namespace GOL
                     + Resources.Grid2S + AxisY.ToString() + "}";
             
                 //drawing heads up display
-                e.Graphics.DrawString(hudInfo, HUDFont, Brushes.Red, new PointF(0, 0), HUDFormat);
+                e.Graphics.DrawString(hudInfo, HUDFont, HUDBrush, new PointF(0, 0), HUDFormat);
             }
 
             //Displaying updated cell count
@@ -543,6 +546,22 @@ namespace GOL
                 CellColor = CellsColor.Color;
             }
             //Asking window to repaint
+            graphicsPanel1.Invalidate();
+        }
+        //Changes color of HUD
+        private void hUDToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //creating color box
+            ColorDialog HUDColorB = new ColorDialog();
+            //passing our current color to box
+            HUDColorB.Color = HUDColor;
+            //displaying color box and handling ok button
+            if (DialogResult.OK == HUDColorB.ShowDialog())
+            {
+                //assigning input to our hud color
+                HUDColor = HUDColorB.Color;
+            }
+            //asking window to repaint
             graphicsPanel1.Invalidate();
         }
     }
