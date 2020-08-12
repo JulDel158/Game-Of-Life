@@ -26,8 +26,6 @@ namespace GOL
         Cell[,] pad; // = new Cell[AxisX, AxisY];
         // Drawing colors
         Color gridColor = Color.Black;
-        // finite t / toroidal f switch
-        bool finite = true;
         // The Timer class
         Timer timer = new Timer();
         //Seed for random generation
@@ -38,12 +36,6 @@ namespace GOL
         int cCount = 0;
         //milliseconds for timer
         int milliseconds = 100;
-        //bool for drawing the grid
-        bool dGrid = true;
-        //bool for drawing cell count
-        bool dCount = true;
-        //bool for HUD
-        bool dHUD = true;
         //string  for mode: toroidal/finite
         string mode = "Toroidal";
         //string for entire HUD
@@ -287,15 +279,15 @@ namespace GOL
                     }
 
                     //updating count of cells
-                    if (finite == false)
+                    if (Properties.Settings.Default.FiniteBorder == false)
                         universe[x, y].nCount = CountNeighborsT(x, y);
                     else
                         universe[x, y].nCount = CountNeighborsF(x, y);
                     //Drawing number of active neighbors if said number is more than 0 per cell
-                    if (dCount && universe[x, y].nCount > 0)
+                    if (Properties.Settings.Default.DrawCellCount && universe[x, y].nCount > 0)
                         e.Graphics.DrawString(universe[x, y].nCount.ToString(), numFont, numBrush, cellRect, numFormat);
                     //Checking if we need to draw grid
-                    if (dGrid)
+                    if (Properties.Settings.Default.DrawGrid)
                     {
                         //Drawing vertical lines
                         e.Graphics.DrawLine(gridPen, (float)(x * cellWidth), 0, (float)(x * cellWidth), (float)graphicsPanel1.ClientSize.Height);
@@ -305,7 +297,7 @@ namespace GOL
                 }
             }
             //Drawing HUD
-            if (dHUD)
+            if (Properties.Settings.Default.DrawHUD)
             {
                 //string to hold hud info
                 hudInfo = Resources.GenS + generations.ToString() + "\n"
@@ -399,13 +391,15 @@ namespace GOL
         //Toggles finite universe (default)
         private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            finite = true;
+            Properties.Settings.Default.FiniteBorder = true;
+           // finite = true;
             graphicsPanel1.Invalidate();
         }
         //Toggles toroidal universe
         private void toroidalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            finite = false;
+            Properties.Settings.Default.FiniteBorder = false;
+           // finite = false;
             graphicsPanel1.Invalidate();
         }
         //Generates random map
@@ -482,8 +476,9 @@ namespace GOL
         //Toggles Grid view
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.DrawGrid = !Properties.Settings.Default.DrawGrid;
             //changes grid boolean to it's opposite value
-            dGrid = !dGrid;
+            //dGrid = !dGrid;
             //asking windows to repaint panel
             graphicsPanel1.Invalidate();
         }
@@ -491,7 +486,7 @@ namespace GOL
         private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //setting count to it's opposite value
-            dCount = !dCount;
+            Properties.Settings.Default.DrawCellCount = !Properties.Settings.Default.DrawCellCount;
             //asking window to repaint panel
             graphicsPanel1.Invalidate();
         }
@@ -499,7 +494,7 @@ namespace GOL
         private void hUDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Changing bool for hud display
-            dHUD = !dHUD;
+            Properties.Settings.Default.DrawHUD = !Properties.Settings.Default.DrawHUD;
             //asking window to repaint
             graphicsPanel1.Invalidate();
         }
@@ -570,9 +565,32 @@ namespace GOL
         //executes when closing program
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            //assigns current background color to setting
             Properties.Settings.Default.BackgroundColor = graphicsPanel1.BackColor;
-
+            //saves settings
             Properties.Settings.Default.Save();
+        }
+        //Reloading current settings
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //reloading settings
+            Properties.Settings.Default.Reload();
+            //assings reloaded color to background color
+            graphicsPanel1.BackColor = Properties.Settings.Default.BackgroundColor;
+
+            //asking window to redraw
+            graphicsPanel1.Invalidate();
+        }
+        //Resetting to default settings
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //resets settings
+            Properties.Settings.Default.Reset();
+            //assigns default color to our background
+            graphicsPanel1.BackColor = Properties.Settings.Default.BackgroundColor;
+
+            //asking window to redraw
+            graphicsPanel1.Invalidate();
         }
     }
 }

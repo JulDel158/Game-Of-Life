@@ -34,5 +34,53 @@ namespace GOL.Properties {
                 this["BackgroundColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FiniteBorder {
+            get {
+                return ((bool)(this["FiniteBorder"]));
+            }
+            set {
+                this["FiniteBorder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DrawGrid {
+            get {
+                return ((bool)(this["DrawGrid"]));
+            }
+            set {
+                this["DrawGrid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DrawCellCount {
+            get {
+                return ((bool)(this["DrawCellCount"]));
+            }
+            set {
+                this["DrawCellCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DrawHUD {
+            get {
+                return ((bool)(this["DrawHUD"]));
+            }
+            set {
+                this["DrawHUD"] = value;
+            }
+        }
     }
 }
