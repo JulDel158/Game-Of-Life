@@ -28,8 +28,6 @@ namespace GOL
         Color gridColor = Color.Black;
         // The Timer class
         Timer timer = new Timer();
-        //Seed for random generation
-        int seed = 0;
         // Generation count
         int generations = 0;
         // Active cell count
@@ -167,9 +165,9 @@ namespace GOL
         private void RandomMap()
         {
             //storing seed from time
-            seed = (int)DateTime.Now.Ticks;
+            Properties.Settings.Default.SeedValue = (int)DateTime.Now.Ticks;
             //passing seed into random
-            Random rng = new Random(seed);
+            Random rng = new Random(Properties.Settings.Default.SeedValue);
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
@@ -309,7 +307,8 @@ namespace GOL
                 //drawing heads up display
                 e.Graphics.DrawString(hudInfo, HUDFont, HUDBrush, new PointF(0, 0), HUDFormat);
             }
-
+            //Updating Seed, needed for settings
+            toolStripSeedLabel.Text = "Seed: " + Properties.Settings.Default.SeedValue.ToString();
             //Displaying updated cell count
             toolStripStatusLabelCellCount.Text = "Active Cells = " + cCount.ToString() + "/" + totalCells.ToString();
             // Cleaning up pens and brushes
@@ -408,7 +407,7 @@ namespace GOL
             //calling my default random method
             RandomMap();
             //updating seed display
-            toolStripSeedLabel.Text = "Seed: " + seed.ToString();
+            toolStripSeedLabel.Text = "Seed: " + Properties.Settings.Default.SeedValue.ToString();
             //repaiting after the generation is complete
             graphicsPanel1.Invalidate();
         }
@@ -418,26 +417,26 @@ namespace GOL
             //creating instance of my modal dialog box
             SeedMD seedbox = new SeedMD();
             //passing the current seed value to numeric up down box  to display the current seed
-            seedbox.Seed = seed;
+            seedbox.Seed = Properties.Settings.Default.SeedValue;
             //shows dialog box and checks if ok was pressed
             if (DialogResult.OK == seedbox.ShowDialog())
             {
                 //assing input value into seed
-                seed = (int)seedbox.Seed;
+                Properties.Settings.Default.SeedValue = (int)seedbox.Seed;
                 //generate map using seed
-                GenerateMap(seed);
+                GenerateMap(Properties.Settings.Default.SeedValue);
             }
             //updating seed display
-            toolStripSeedLabel.Text = "Seed: " + seed.ToString();
+            toolStripSeedLabel.Text = "Seed: " + Properties.Settings.Default.SeedValue.ToString();
             //repaiting after the generation is complete
             graphicsPanel1.Invalidate();
         }
         //Generate map from currrent seed
         private void currentSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GenerateMap(seed);
+            GenerateMap(Properties.Settings.Default.SeedValue);
             //updating seed display
-            toolStripSeedLabel.Text = "Seed: " + seed.ToString();
+            toolStripSeedLabel.Text = "Seed: " + Properties.Settings.Default.SeedValue.ToString();
             //repaiting after the generation is complete
             graphicsPanel1.Invalidate();
         }

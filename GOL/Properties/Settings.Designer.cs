@@ -82,5 +82,17 @@ namespace GOL.Properties {
                 this["DrawHUD"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SeedValue {
+            get {
+                return ((int)(this["SeedValue"]));
+            }
+            set {
+                this["SeedValue"] = value;
+            }
+        }
     }
 }
