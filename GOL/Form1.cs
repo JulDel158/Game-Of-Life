@@ -28,8 +28,6 @@ namespace GOL
         Color gridColor = Color.Black;
         // The Timer class
         Timer timer = new Timer();
-        // Active cell count
-        int cCount = 0;
         //milliseconds for timer
         int milliseconds = 100;
         //string  for mode: toroidal/finite
@@ -219,7 +217,7 @@ namespace GOL
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
             //resetting count
-            cCount = 0;
+            Properties.Settings.Default.ActiveCellCount = 0;
             // Calculate the width and height of each cell in pixels
             // CELL WIDTH = WINDOW WIDTH / NUMBER OF CELLS IN X
             float cellWidth = (float)graphicsPanel1.ClientSize.Width / (float)universe.GetLength(0);
@@ -269,7 +267,7 @@ namespace GOL
                     if (universe[x, y].active)
                     {
                         //adding to total active count
-                        cCount++;
+                        Properties.Settings.Default.ActiveCellCount++;
                         //filling rectangle / cell
                         e.Graphics.FillRectangle(cellBrush, cellRect);
                     }
@@ -297,7 +295,7 @@ namespace GOL
             {
                 //string to hold hud info
                 hudInfo = Resources.GenS + Properties.Settings.Default.GenerationValue.ToString() + "\n"
-                    + Resources.CountS + cCount.ToString() + "\n"
+                    + Resources.CountS + Properties.Settings.Default.ActiveCellCount.ToString() + "\n"
                     + Resources.BoundS + mode + "\n"
                     + Resources.GridS + AxisX.ToString()
                     + Resources.Grid2S + AxisY.ToString() + "}";
@@ -310,7 +308,7 @@ namespace GOL
             //Updating Seed, needed for settings
             toolStripSeedLabel.Text = "Seed: " + Properties.Settings.Default.SeedValue.ToString();
             //Displaying updated cell count
-            toolStripStatusLabelCellCount.Text = "Active Cells = " + cCount.ToString() + "/" + totalCells.ToString();
+            toolStripStatusLabelCellCount.Text = "Active Cells = " + Properties.Settings.Default.ActiveCellCount.ToString() + "/" + totalCells.ToString();
             // Cleaning up pens and brushes
             gridPen.Dispose();
             cellBrush.Dispose();
@@ -357,11 +355,12 @@ namespace GOL
                     //reseting count to 0 done by paint
                 }
             }
+            //resetting seed
+            Properties.Settings.Default.SeedValue = 0;
             //restarting generation count
             Properties.Settings.Default.GenerationValue = 0;
-            cCount = 0;
-            toolStripStatusLabelGenerations.Text = "Generations = " + Properties.Settings.Default.GenerationValue.ToString();
-           // toolStripStatusLabelCellCount.Text = "Active Cells = " + cCount.ToString();
+            //Resetting active cell count done by paint
+
             //repainting after turning off all cells
             graphicsPanel1.Invalidate();
         }

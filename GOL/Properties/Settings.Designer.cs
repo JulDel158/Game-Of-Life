@@ -106,5 +106,17 @@ namespace GOL.Properties {
                 this["GenerationValue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ActiveCellCount {
+            get {
+                return ((int)(this["ActiveCellCount"]));
+            }
+            set {
+                this["ActiveCellCount"] = value;
+            }
+        }
     }
 }
