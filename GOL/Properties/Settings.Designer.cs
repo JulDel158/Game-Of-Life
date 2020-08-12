@@ -214,5 +214,17 @@ namespace GOL.Properties {
                 this["HUDInfo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UniverseString {
+            get {
+                return ((string)(this["UniverseString"]));
+            }
+            set {
+                this["UniverseString"] = value;
+            }
+        }
     }
 }

@@ -20,8 +20,6 @@ namespace GOL
         Cell[,] pad; // = new Cell[AxisX, AxisY];
         // The Timer class
         Timer timer = new Timer();
-        //string  for mode: toroidal/finite
-        string mode = "Toroidal";
 
         public Form1()
         {
@@ -58,7 +56,7 @@ namespace GOL
         private int CountNeighborsF (int x, int y)
         {
             //Changing string for HUD
-            mode = "Finite";
+            Properties.Settings.Default.UniverseString = Properties.Resources.FiniteS;
             int count = 0;
             //size of x dimmension
             int xL = universe.GetLength(0);
@@ -89,7 +87,7 @@ namespace GOL
         private int CountNeighborsT (int x, int y)
         {
             //Changing my string for HUD
-            mode = "Toroidal";
+            Properties.Settings.Default.UniverseString = Properties.Resources.ToroidalS;
             int count = 0;
             int xL = universe.GetLength(0);
             int yL = universe.GetLength(1);
@@ -280,7 +278,7 @@ namespace GOL
                 //string to hold hud info
                 Properties.Settings.Default.HUDInfo = Resources.GenS + Properties.Settings.Default.GenerationValue.ToString() + "\n"
                     + Resources.CountS + Properties.Settings.Default.ActiveCellCount.ToString() + "\n"
-                    + Resources.BoundS + mode + "\n"
+                    + Resources.BoundS + Properties.Settings.Default.UniverseString + "\n"
                     + Resources.GridS + Properties.Settings.Default.UniXAxis.ToString()
                     + Resources.Grid2S + Properties.Settings.Default.UniYAxis.ToString() + "}";
             

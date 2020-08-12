@@ -79,6 +79,15 @@ namespace GOL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finite.
+        /// </summary>
+        internal static string FiniteS {
+            get {
+                return ResourceManager.GetString("FiniteS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generations = .
         /// </summary>
         internal static string GenS {
@@ -132,6 +141,15 @@ namespace GOL.Properties {
             get {
                 object obj = ResourceManager.GetObject("Stop_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toroidal.
+        /// </summary>
+        internal static string ToroidalS {
+            get {
+                return ResourceManager.GetString("ToroidalS", resourceCulture);
             }
         }
     }
