@@ -28,8 +28,6 @@ namespace GOL
         Color gridColor = Color.Black;
         // The Timer class
         Timer timer = new Timer();
-        //milliseconds for timer
-        int milliseconds = 100;
         //string  for mode: toroidal/finite
         string mode = "Toroidal";
         //string for entire HUD
@@ -48,7 +46,7 @@ namespace GOL
             //calling my method for initializing/resizing universe
             SizeUniverse(AxisX, AxisY);
             // Setup the timer
-            timer.Interval = milliseconds; // milliseconds
+            timer.Interval = Properties.Settings.Default.TimerMilliseconds; // milliseconds
             timer.Tick += Timer_Tick;
         }
         
@@ -208,7 +206,7 @@ namespace GOL
         // The event called by the timer every Interval milliseconds.
         private void Timer_Tick(object sender, EventArgs e)
         {
-            timer.Interval = milliseconds;
+            timer.Interval = Properties.Settings.Default.TimerMilliseconds;
             NextGeneration();
             //repainting
             graphicsPanel1.Invalidate();
@@ -355,6 +353,8 @@ namespace GOL
                     //reseting count to 0 done by paint
                 }
             }
+            //assigning default value to milliseconds
+            Properties.Settings.Default.TimerMilliseconds = 100;
             //resetting seed
             Properties.Settings.Default.SeedValue = 0;
             //restarting generation count
@@ -464,12 +464,12 @@ namespace GOL
         private void timerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //creating instance of our timerMD modal box and passing parameter to my overloaded constructor
-            TimerMD timerBox = new TimerMD(milliseconds);
+            TimerMD timerBox = new TimerMD(Properties.Settings.Default.TimerMilliseconds);
             //shows box and executes code if ok is pressed
             if (DialogResult.OK == timerBox.ShowDialog())
             {
                 //changes the milliseconds to user input
-                milliseconds = (int)timerBox.Milliseconds;
+                Properties.Settings.Default.TimerMilliseconds = (int)timerBox.Milliseconds;
             }
         }
         //Toggles Grid view

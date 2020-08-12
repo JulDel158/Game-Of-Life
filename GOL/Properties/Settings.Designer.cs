@@ -118,5 +118,17 @@ namespace GOL.Properties {
                 this["ActiveCellCount"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int TimerMilliseconds {
+            get {
+                return ((int)(this["TimerMilliseconds"]));
+            }
+            set {
+                this["TimerMilliseconds"] = value;
+            }
+        }
     }
 }
