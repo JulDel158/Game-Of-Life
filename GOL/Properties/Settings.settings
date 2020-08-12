@@ -44,5 +44,8 @@
     <Setting Name="ActiveCellColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Gray</Value>
     </Setting>
+    <Setting Name="HUDColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">255, 128, 128</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

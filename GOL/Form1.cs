@@ -24,8 +24,6 @@ namespace GOL
         string mode = "Toroidal";
         //string for entire HUD
         string hudInfo = string.Empty;
-        //color for HUD
-        Color HUDColor = Color.Red;
 
         public Form1()
         {
@@ -215,7 +213,7 @@ namespace GOL
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(Properties.Settings.Default.GridColor, 1);
             //Brush for HUD
-            Brush HUDBrush = new SolidBrush(HUDColor);
+            Brush HUDBrush = new SolidBrush(Properties.Settings.Default.HUDColor);
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(Properties.Settings.Default.ActiveCellColor);
             //color for numbers
@@ -535,12 +533,12 @@ namespace GOL
             //creating color box
             ColorDialog HUDColorB = new ColorDialog();
             //passing our current color to box
-            HUDColorB.Color = HUDColor;
+            HUDColorB.Color = Properties.Settings.Default.HUDColor;
             //displaying color box and handling ok button
             if (DialogResult.OK == HUDColorB.ShowDialog())
             {
                 //assigning input to our hud color
-                HUDColor = HUDColorB.Color;
+                Properties.Settings.Default.HUDColor = HUDColorB.Color;
             }
             //asking window to repaint
             graphicsPanel1.Invalidate();
