@@ -142,5 +142,29 @@ namespace GOL.Properties {
                 this["CellTotalValue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int UniXAxis {
+            get {
+                return ((int)(this["UniXAxis"]));
+            }
+            set {
+                this["UniXAxis"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int UniYAxis {
+            get {
+                return ((int)(this["UniYAxis"]));
+            }
+            set {
+                this["UniYAxis"] = value;
+            }
+        }
     }
 }

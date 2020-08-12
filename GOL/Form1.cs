@@ -14,9 +14,6 @@ namespace GOL
 {
     public partial class Form1 : Form
     {
-        //axis of the universe, may be removed later, due to our line drawing method our universe must be squared
-        int AxisX = 30;
-        int AxisY = 30;
         // The universe array
         Cell[,] universe; // = new Cell[AxisX, AxisY];
         // Scratch pad array
@@ -41,7 +38,7 @@ namespace GOL
             graphicsPanel1.BackColor = Properties.Settings.Default.BackgroundColor;
 
             //calling my method for initializing/resizing universe
-            SizeUniverse(AxisX, AxisY);
+            SizeUniverse(Properties.Settings.Default.UniXAxis, Properties.Settings.Default.UniYAxis);
             // Setup the timer
             timer.Interval = Properties.Settings.Default.TimerMilliseconds; // milliseconds
             timer.Tick += Timer_Tick;
@@ -292,8 +289,8 @@ namespace GOL
                 hudInfo = Resources.GenS + Properties.Settings.Default.GenerationValue.ToString() + "\n"
                     + Resources.CountS + Properties.Settings.Default.ActiveCellCount.ToString() + "\n"
                     + Resources.BoundS + mode + "\n"
-                    + Resources.GridS + AxisX.ToString()
-                    + Resources.Grid2S + AxisY.ToString() + "}";
+                    + Resources.GridS + Properties.Settings.Default.UniXAxis.ToString()
+                    + Resources.Grid2S + Properties.Settings.Default.UniYAxis.ToString() + "}";
             
                 //drawing heads up display
                 e.Graphics.DrawString(hudInfo, HUDFont, HUDBrush, new PointF(0, 0), HUDFormat);
@@ -338,18 +335,12 @@ namespace GOL
         {
             //stopping the timer
             timer.Stop();
-            //first universe
-            for (int y = 0; y < universe.GetLength(1); y++) 
-            {
-                //second universe
-                for (int x = 0; x < universe.GetLength(0); x++)
-                {
-                    //turning off the cell
-                    universe[x, y].active = false;
-                    pad[x, y].active = false;
-                    //reseting count to 0 done by paint
-                }
-            }
+            //assigning default value to axis
+            Properties.Settings.Default.UniXAxis = 30;
+            Properties.Settings.Default.UniYAxis = 30;
+            //resizing universe to default
+            SizeUniverse(Properties.Settings.Default.UniXAxis, Properties.Settings.Default.UniYAxis);
+            
             //assigning default value to milliseconds
             Properties.Settings.Default.TimerMilliseconds = 100;
             //resetting seed
@@ -443,16 +434,16 @@ namespace GOL
             //creating instance of our grid modal box
             GridMD grid = new GridMD();
             //setting the value inside the numupdown to current value
-            grid.xSize = AxisX;
-            grid.ySize = AxisY;
+            grid.xSize = Properties.Settings.Default.UniXAxis;
+            grid.ySize = Properties.Settings.Default.UniYAxis;
             //showing box/ handling ok
             if (DialogResult.OK == grid.ShowDialog())
             {
                 //setting out axis variables = to user input
-                AxisX = (int)grid.xSize;
-                AxisY = (int)grid.ySize;
+                Properties.Settings.Default.UniXAxis = (int)grid.xSize;
+                Properties.Settings.Default.UniYAxis = (int)grid.ySize;
                 //resizing universe
-                SizeUniverse(AxisX, AxisY);
+                SizeUniverse(Properties.Settings.Default.UniXAxis, Properties.Settings.Default.UniYAxis);
             }
             //asking for a repainting
             graphicsPanel1.Invalidate();
