@@ -24,8 +24,6 @@ namespace GOL
         string mode = "Toroidal";
         //string for entire HUD
         string hudInfo = string.Empty;
-        //Color for Cell
-        Color CellColor = Color.Gray;
         //color for HUD
         Color HUDColor = Color.Red;
 
@@ -219,7 +217,7 @@ namespace GOL
             //Brush for HUD
             Brush HUDBrush = new SolidBrush(HUDColor);
             // A Brush for filling living cells interiors (color)
-            Brush cellBrush = new SolidBrush(CellColor);
+            Brush cellBrush = new SolidBrush(Properties.Settings.Default.ActiveCellColor);
             //color for numbers
             Color numColor = Color.Red;
             //brush for numbers
@@ -521,12 +519,12 @@ namespace GOL
             //creating color box
             ColorDialog CellsColor = new ColorDialog();
             //assigning the current color of the cells to display on box
-            CellsColor.Color = CellColor;
+            CellsColor.Color = Properties.Settings.Default.ActiveCellColor;
             //displaying color box and handling ok
             if (DialogResult.OK == CellsColor.ShowDialog())
             {
                 //assigning user input to cell color
-                CellColor = CellsColor.Color;
+                Properties.Settings.Default.ActiveCellColor = CellsColor.Color;
             }
             //Asking window to repaint
             graphicsPanel1.Invalidate();

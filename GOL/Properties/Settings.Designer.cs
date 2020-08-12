@@ -178,5 +178,17 @@ namespace GOL.Properties {
                 this["GridColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Gray")]
+        public global::System.Drawing.Color ActiveCellColor {
+            get {
+                return ((global::System.Drawing.Color)(this["ActiveCellColor"]));
+            }
+            set {
+                this["ActiveCellColor"] = value;
+            }
+        }
     }
 }
