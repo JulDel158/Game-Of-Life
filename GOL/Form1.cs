@@ -241,7 +241,7 @@ namespace GOL
             //brush for numbers
             Brush numBrush = new SolidBrush(numColor);
             //font for numbers/ cell count
-            Font numFont = new Font(new FontFamily("Arial"), 10f, FontStyle.Bold, GraphicsUnit.Point);
+            Font numFont = new Font(new FontFamily("Arial"), 12f, FontStyle.Bold, GraphicsUnit.Point);
             //format for number
             StringFormat numFormat = new StringFormat();
             //Alignment of format
@@ -494,6 +494,20 @@ namespace GOL
             dHUD = !dHUD;
             //asking window to repaint
             graphicsPanel1.Invalidate();
+        }
+
+        private void backgroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //creating instance of the color dialog box
+            ColorDialog BackGrColor = new ColorDialog();
+            //passing the current color to display it to the user
+            BackGrColor.Color = graphicsPanel1.BackColor;
+            //displaying the color box and checking if they pressed ok. 
+            if (DialogResult.OK == BackGrColor.ShowDialog())
+            {
+                //Assigning the value the user picked to the panel
+                graphicsPanel1.BackColor = BackGrColor.Color;
+            }
         }
     }
 }
