@@ -56,6 +56,9 @@ namespace GOL
         public Form1()
         {
             InitializeComponent();
+            //Reading settings
+            graphicsPanel1.BackColor = Properties.Settings.Default.BackgroundColor;
+
             //calling my method for initializing/resizing universe
             SizeUniverse(AxisX, AxisY);
             // Setup the timer
@@ -563,6 +566,13 @@ namespace GOL
             }
             //asking window to repaint
             graphicsPanel1.Invalidate();
+        }
+        //executes when closing program
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.BackgroundColor = graphicsPanel1.BackColor;
+
+            Properties.Settings.Default.Save();
         }
     }
 }
