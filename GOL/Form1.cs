@@ -18,8 +18,6 @@ namespace GOL
         Cell[,] universe; // = new Cell[AxisX, AxisY];
         // Scratch pad array
         Cell[,] pad; // = new Cell[AxisX, AxisY];
-        // Drawing colors
-        Color gridColor = Color.Black;
         // The Timer class
         Timer timer = new Timer();
         //string  for mode: toroidal/finite
@@ -217,7 +215,7 @@ namespace GOL
             float cellHeight = (float)graphicsPanel1.ClientSize.Height / (float)universe.GetLength(1);
 
             // A Pen for drawing the grid lines (color, width)
-            Pen gridPen = new Pen(gridColor, 1);
+            Pen gridPen = new Pen(Properties.Settings.Default.GridColor, 1);
             //Brush for HUD
             Brush HUDBrush = new SolidBrush(HUDColor);
             // A Brush for filling living cells interiors (color)
@@ -507,12 +505,12 @@ namespace GOL
             //Creating instance of color box
             ColorDialog GridColor = new ColorDialog();
             //passing the current color to color box
-            GridColor.Color = gridColor;
+            GridColor.Color = Properties.Settings.Default.GridColor;
             //displays color box and checks ok button action
             if (DialogResult.OK == GridColor.ShowDialog())
             {
                 //changing the grid color to user input
-                gridColor = GridColor.Color;
+                Properties.Settings.Default.GridColor = GridColor.Color;
             }
             //asking for repaint
             graphicsPanel1.Invalidate();
